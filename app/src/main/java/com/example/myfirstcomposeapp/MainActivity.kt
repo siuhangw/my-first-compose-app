@@ -1,5 +1,4 @@
 package com.example.myfirstcomposeapp
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
@@ -36,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
@@ -61,9 +62,43 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+data class ListItem(
+    val title: String,
+    val body: String,
+    val icon: ImageVector
+)
+
 @Preview(showBackground = true)
 @Composable
-fun listItemComposable(
+fun ListComposable(modifier: Modifier = Modifier) {
+    val items = listOf(
+        ListItem("Item 1", "Description for item 1", Icons.Filled.Add),
+        ListItem("Item 2", "Description for item 2", Icons.Filled.Add),
+        ListItem("Item 3", "Description for item 3", Icons.Filled.Add)
+    )
+    Column(modifier = modifier
+        .padding(16.dp)
+    ) {
+        items.forEach {
+            item ->
+                ListItemComposable(
+                    title = item.title,
+                    body = item.body,
+                    imageIcon = item.icon
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+        }
+//        ListItemComposable(
+//            title = "Item 1",
+//            body = "Description for item 1",
+//            imageIcon = Icons.Filled.Add
+//        )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ListItemComposable(
         title: String = "Default Title",
         body: String = "Default Body",
         imageIcon: ImageVector = Icons.Filled.Add,
@@ -72,6 +107,8 @@ fun listItemComposable(
         Row(
             modifier = modifier
                 .fillMaxWidth()
+                .clip(RoundedCornerShape(16.dp))
+                .background(color = Color(0xFF4285f4))
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
@@ -86,7 +123,6 @@ fun listItemComposable(
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
-
             Image(
                 imageVector = imageIcon,
                 contentDescription = null,
@@ -97,8 +133,7 @@ fun listItemComposable(
         }
 }
 
-
-
+@Preview(showBackground = true)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyScaffoldScreen(){
@@ -117,15 +152,14 @@ fun MyScaffoldScreen(){
                 )
             )
         }
-    ) { innerPadding ->
-        // Add this content section to display body content
-        SimpleLayoutContent(
-            modifier = Modifier.padding(innerPadding)
-        )
+    ) {
+        innerPadding ->
+        SimpleLayoutContent(modifier = Modifier.padding(innerPadding))
+        ListComposable()
     }
 }
 
-
+@Preview(showBackground = true)
 @Composable
 fun SimpleLayoutContent(modifier: Modifier = Modifier) {
     Column(modifier = modifier
@@ -150,7 +184,6 @@ fun SimpleLayoutContent(modifier: Modifier = Modifier) {
 @Composable
 fun SimpleLayoutPreview() {
     MyFirstComposeAppTheme {
-//        SimpleLayoutContent()
         MyScaffoldScreen()
     }
 }

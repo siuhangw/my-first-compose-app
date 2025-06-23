@@ -8,7 +8,8 @@ on:
 jobs:
   build_and_release:
     runs-on: ubuntu-latest # Use a Linux runner for faster Android builds
-
+    permissions:
+      contents: write # Add this line to grant write permission
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4 # Action to get your repository's code

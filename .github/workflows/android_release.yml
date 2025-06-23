@@ -41,7 +41,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/') # Only run if triggered by a tag push
         with:
-          files: app/build/outputs/apk/release/app-release.apk # Path to your built APK
+          files: app/build/outputs/apk/release/app-release-unsigned.apk # Path to your built APK
           name: Release ${{ github.ref_name }} # Release name will be the tag name (e.g., v1.0.0)
           draft: false # Publish immediately, set to true if you want to review first
           prerelease: false # Not a pre-release

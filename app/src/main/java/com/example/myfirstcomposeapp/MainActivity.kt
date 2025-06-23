@@ -92,38 +92,38 @@ fun ListComposable(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun ListItemComposable(
-        title: String = "Default Title",
-        body: String = "Default Body",
-        imageIcon: ImageVector = Icons.Filled.Add,
-        modifier: Modifier = Modifier
+    title: String = "Default Title",
+    body: String = "Default Body",
+    imageIcon: ImageVector = Icons.Filled.Add,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .background(color = Color(0xFF4285f4))
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(16.dp))
-                .background(color = Color(0xFF4285f4))
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Column {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleLarge
-                )
-                Text(
-                    text = body,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-            Image(
-                imageVector = imageIcon,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(48.dp)
-                    .padding(end = 16.dp)
+        Column {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge
+            )
+            Text(
+                text = body,
+                style = MaterialTheme.typography.bodyMedium
             )
         }
+        Image(
+            imageVector = imageIcon,
+            contentDescription = null,
+            modifier = Modifier
+                .size(48.dp)
+                .padding(end = 16.dp)
+        )
+    }
 }
 
 @Preview(showBackground = true)

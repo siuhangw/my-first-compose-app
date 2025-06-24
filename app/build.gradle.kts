@@ -6,17 +6,20 @@ plugins {
 
 android {
     signingConfigs {
-        getByName("debug") {
-            storeFile = file("RELEASE_STORE_FILE")
-            storePassword = "RELEASE_STORE_PASSWORD"
-            keyAlias = "RELEASE_KEY_ALIAS"
-            keyPassword = "RELEASE_KEY_PASSWORD"
-        }
+//        getByName("debug") {
+//            storeFile = file("RELEASE_STORE_FILE")
+//            storePassword = "RELEASE_STORE_PASSWORD"
+//            keyAlias = "RELEASE_KEY_ALIAS"
+//            keyPassword = "RELEASE_KEY_PASSWORD"
+//        }
         create("release") {
-            storeFile = file("RELEASE_STORE_FILE")
-            storePassword = "RELEASE_STORE_PASSWORD"
-            keyAlias = "RELEASE_KEY_ALIAS"
-            keyPassword = "RELEASE_KEY_PASSWORD"
+            val keystorePath = System.getenv("RELEASE_STORE_FILE")
+            if (keystorePath != null && keystorePath.isNotEmpty()) {
+                storeFile = File(keystorePath)
+                storePassword = System.getenv("RELEASE_STORE_PASSWORD")
+                keyAlias = System.getenv("RELEASE_KEY_ALIAS")
+                keyPassword = System.getenv("RELEASE_KEY_PASSWORD")
+            }
         }
     }
     namespace = "com.example.myfirstcomposeapp"

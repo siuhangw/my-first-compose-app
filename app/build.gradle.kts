@@ -6,11 +6,11 @@ plugins {
 
 android {
     signingConfigs {
-        getByName("debug") {
-            storeFile = file("RELEASE_STORE_FILE")
-            storePassword = "RELEASE_STORE_PASSWORD"
-            keyAlias = "RELEASE_KEY_ALIAS"
-            keyPassword = "RELEASE_KEY_PASSWORD"
+        create("release") {
+            storeFile = file(System.getenv("SIGNING_STORE_FILE"))
+            storePassword = System.getenv("SIGNING_STORE_PASSWORD")
+            keyAlias = System.getenv("SIGNING_KEY_ALIAS")
+            keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
         }
     }
     namespace = "com.example.myfirstcomposeapp"
@@ -33,6 +33,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {

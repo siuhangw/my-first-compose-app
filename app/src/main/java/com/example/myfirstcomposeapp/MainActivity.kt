@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -33,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myfirstcomposeapp.ui.theme.MyFirstComposeAppTheme
@@ -67,7 +69,16 @@ fun ListComposable(modifier: Modifier = Modifier) {
     val items = listOf(
         ListItem("Item 1", "Description for item 1", Icons.Filled.Add),
         ListItem("Item 2", "Description for item 2", Icons.Filled.Add),
-        ListItem("Item 3", "Description for item 3", Icons.Filled.Add)
+        ListItem("Item 3", "Description for item 3", Icons.Filled.Add),
+        ListItem("Item 4", "Description for item 4", Icons.Filled.Add),
+        ListItem("Item 5", "Description for item 5", Icons.Filled.Add),
+        ListItem("Item 6", "Description for item 6", Icons.Filled.Add),
+        ListItem("Item 7", "Description for item 7", Icons.Filled.Add),
+        ListItem("Item 8", "Description for item 8", Icons.Filled.Add),
+        ListItem("Item 9", "Description for item 9", Icons.Filled.Add),
+        ListItem("Item 10", "Description for item 10", Icons.Filled.Add),
+        ListItem("Item 11", "Description for item 11", Icons.Filled.Add),
+        ListItem("Item 12", "Description for item 12", Icons.Filled.Add)
     )
     Column(modifier = modifier
         .padding(16.dp)
@@ -131,7 +142,7 @@ fun ListItemComposable(
 @Composable
 fun MyScaffoldScreen(){
     Scaffold(
-        containerColor = Color.Red, // <--- Set the background color of the Scaffold here
+        containerColor = Color.White, // <--- Set the background color of the Scaffold here
         topBar = {
             TopAppBar(
                 title = { Text("My App") },
@@ -141,18 +152,35 @@ fun MyScaffoldScreen(){
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Green // 🔴 将顶部标题栏背景颜色改为绿色
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary,
                 )
             )
+        },
+        bottomBar = {
+            BottomAppBar(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.primary,
+            ) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    text = "Bottom app bar",
+                )
+            }
         }
-    ) {
-        innerPadding ->
-        SimpleLayoutContent(modifier = Modifier.padding(innerPadding))
-        ListComposable()
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            ListComposable()
+        }
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun SimpleLayoutContent(modifier: Modifier = Modifier) {
     Column(modifier = modifier

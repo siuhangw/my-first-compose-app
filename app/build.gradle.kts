@@ -6,7 +6,7 @@ plugins {
 
 android {
     signingConfigs {
-        getByName("release") {
+        getByName("debug") {
             storeFile = file("RELEASE_STORE_FILE")
             storePassword = "RELEASE_STORE_PASSWORD"
             keyAlias = "RELEASE_KEY_ALIAS"
@@ -28,7 +28,6 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

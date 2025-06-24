@@ -12,6 +12,12 @@ android {
             keyAlias = "RELEASE_KEY_ALIAS"
             keyPassword = "RELEASE_KEY_PASSWORD"
         }
+        create("release") {
+            storeFile = file("RELEASE_STORE_FILE")
+            storePassword = "RELEASE_STORE_PASSWORD"
+            keyAlias = "RELEASE_KEY_ALIAS"
+            keyPassword = "RELEASE_KEY_PASSWORD"
+        }
     }
     namespace = "com.example.myfirstcomposeapp"
     compileSdk = 35
@@ -33,6 +39,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {

@@ -6,7 +6,7 @@ plugins {
 
 android {
     signingConfigs {
-        create("release") {
+        getByName("debug") {
             storeFile = file("RELEASE_STORE_FILE")
             storePassword = "RELEASE_STORE_PASSWORD"
             keyAlias = "RELEASE_KEY_ALIAS"

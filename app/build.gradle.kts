@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("RELEASE_STORE_FILE")
+            storePassword = "RELEASE_STORE_PASSWORD"
+            keyAlias = "RELEASE_KEY_ALIAS"
+            keyPassword = "RELEASE_KEY_PASSWORD"
+        }
+    }
     namespace = "com.example.myfirstcomposeapp"
     compileSdk = 35
 
